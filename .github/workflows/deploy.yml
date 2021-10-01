@@ -10,10 +10,12 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    uses: actions/github-script@v5
-    with:
-      script:
-        console.log(JSON.stringify(context, null, 2))
+    steps:
+      - name: Log context
+        uses: actions/github-script@v5
+        with:
+          script:
+            console.log(JSON.stringify(context, null, 2))
     # if: >
     #   ${{ github.event_name == 'push' &&
     #   github.event.workflow_run.conclusion == 'success' }}
