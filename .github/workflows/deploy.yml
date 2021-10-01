@@ -15,7 +15,8 @@ jobs:
         uses: actions/github-script@v5
         with:
           script: |
-            const prNumber = context.pull_requests[0] && context.pull_requests[0].number
+            const {pull_requests} = context.payload.workflow_run;
+            const prNumber = pull_requests[0] && pull_requests[0].number
             if (prNumber) {
               github.rest.issues.createComment({
                 issue_number: prNumber,
