@@ -15,6 +15,15 @@ jobs:
         uses: actions/github-script@v5
         with:
           script:
+            const prNumber = context.pull_requests[0] && context.pull_requests[0].number
+            if (prNumber) {
+              github.rest.issues.createComment({
+                issue_number: prNumber,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: '🤖'
+              })
+            }
             console.log(JSON.stringify(context, null, 2))
     # if: >
     #   ${{ github.event_name == 'push' &&
